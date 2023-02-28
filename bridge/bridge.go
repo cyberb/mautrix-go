@@ -529,11 +529,11 @@ func (br *Bridge) start() {
 		}
 	}
 
-	if br.AS.Host.Port != 0 {
+	if br.AS.Host.IsConfigured() {
 		br.ZLog.Debug().Msg("Starting application service HTTP server")
 		go br.AS.Start()
 	} else {
-		br.ZLog.Debug().Msg("Appservice port not configured, not starting HTTP server")
+		br.ZLog.Debug().Msg("Appservice port or unix socket is not configured, not starting HTTP server")
 	}
 	br.ZLog.Debug().Msg("Starting event processor")
 	br.EventProcessor.Start()
